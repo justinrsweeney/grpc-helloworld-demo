@@ -47,7 +47,7 @@ tasks.withType<JavaCompile>() {
 protobuf {
     protoc {
         // Download from repositories
-        artifact = "com.google.protobuf:protoc:3.18.1"
+        artifact = "com.google.protobuf:protoc:3.0.0"
     }
 
     plugins {
