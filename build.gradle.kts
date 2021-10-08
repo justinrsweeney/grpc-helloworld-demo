@@ -45,6 +45,11 @@ tasks.withType<JavaCompile>() {
 }
 
 protobuf {
+    protoc {
+        // Download from repositories
+        artifact = "com.google.protobuf:protoc:3.18.1"
+    }
+
     plugins {
         id("grpc") {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
