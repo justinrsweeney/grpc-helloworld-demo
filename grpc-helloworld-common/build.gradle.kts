@@ -7,41 +7,29 @@ plugins {
     id("com.google.protobuf") version "0.8.17"
 }
 
-repositories {
-    mavenLocal()
+group = "com.sweeney"
+version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+repositories {
+    mavenCentral()
 }
 
 var grpcVersion = "1.41.0"
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-actuator:2.5.5")
-    implementation("org.springframework.boot:spring-boot-starter-web:2.5.5")
     implementation("io.grpc:grpc-netty:${grpcVersion}")
     implementation("io.grpc:grpc-protobuf:${grpcVersion}")
     implementation("io.grpc:grpc-auth:${grpcVersion}")
-    implementation("io.github.lognet:grpc-spring-boot-starter:4.5.7")
     implementation("io.grpc:grpc-stub:${grpcVersion}")
     implementation("io.grpc:grpc-services:${grpcVersion}")
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.5")
+    implementation("javax.annotation:javax.annotation-api:1.3.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
-group = "com.sweeney"
-version = "0.0.1-SNAPSHOT"
-description = "grpc-helloworld"
-java.sourceCompatibility = JavaVersion.VERSION_17
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
-}
-
-tasks.withType<JavaCompile>() {
-    options.encoding = "UTF-8"
+tasks.getByName<Test>("test") {
+    useJUnitPlatform()
 }
 
 protobuf {

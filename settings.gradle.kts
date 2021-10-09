@@ -3,3 +3,6 @@
  */
 
 rootProject.name = "grpc-helloworld"
+include("grpc-helloworld-common")
+include("grpc-helloworld-server")
+include("grpc-helloworld-client")
