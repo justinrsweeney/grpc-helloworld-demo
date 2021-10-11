@@ -65,7 +65,6 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           context: ./grpc-helloworld-server
           file: ./grpc-helloworld-server/Dockerfile
-          target: prod
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.prep.outputs.tags }}
           cache-from: type=gha

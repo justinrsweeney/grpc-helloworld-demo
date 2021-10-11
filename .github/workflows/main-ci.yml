@@ -53,17 +53,6 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Test
-      id: docker_test
-      uses: docker/build-push-action@v2
-      with:
-        builder: ${{ steps.buildx.outputs.name }}
-        context: ./grpc-helloworld-server
-        file: ./grpc-helloworld-server/Dockerfile
-        target: test
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2
@@ -71,7 +60,6 @@ jobs:
         builder: ${{ steps.buildx.outputs.name }}
         context: ./grpc-helloworld-server
         file: ./grpc-helloworld-server/Dockerfile
-        target: prod
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.prep.outputs.tags }}
         cache-from: type=gha
